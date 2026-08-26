@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Shield Intelligence Team - CSIT সদস্য নিয়োগ ফরম</title>
+    <link rel="stylesheet" href="/join/style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Hind+Siliguri:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("0f5sSpqFsI3wIFK6y"); // আপনার EmailJS Public Key এখানে বসাবেন
+        })();
+    </script>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Logo Header -->
+        <div class="logo-container">
+            <img src="/assets/file_00000000f4187207bb6817070d03674e.png" alt="CSIT Logo" class="logo">
+            <h2>Cyber Shield Intelligence Team - CSIT</h2>
+            <p>অপারেটিভ সদস্য নিয়োগ আবেদন পোর্টাল</p>
+        </div>
+
+        <form id="recruitmentForm" onsubmit="handleFormSubmit(event)">
+            
+            <div class="input-group">
+                <label>পূর্ণ নাম (Full Name)</label>
+                <input type="text" id="fullname" required placeholder="আপনার পুরো নাম লিখুন">
+            </div>
+
+            <div class="input-group">
+                <label>জিমেইল অ্যাড্রেস (Gmail Address)</label>
+                <input type="email" id="email" required placeholder="example@gmail.com">
+            </div>
+
+            <div class="input-group">
+                <label>শিক্ষাগত যোগ্যতা</label>
+                <input type="text" id="education" required placeholder="যেমন: SSC 2026 / HSC / Hons">
+            </div>
+
+            <div class="input-group">
+                <label>বর্তমান ঠিকানা (Present Address)</label>
+                <textarea id="present_address" rows="2" required placeholder="বর্তমান ঠিকানা"></textarea>
+            </div>
+
+            <div class="input-group">
+                <label>স্থায়ী ঠিকানা (Permanent Address)</label>
+                <textarea id="permanent_address" rows="2" required placeholder="স্থায়ী ঠিকানা"></textarea>
+            </div>
+
+            <div class="input-group">
+                <label>মোবাইল নম্বর (Mobile Number)</label>
+                <input type="tel" id="phone" required placeholder="০১৭xxxxxxxx">
+            </div>
+
+            <div class="input-group">
+                <label>পেশা (Occupation)</label>
+                <input type="text" id="occupation" required placeholder="যেমন: Student / Freelancer">
+            </div>
+
+            <!-- Dynamic Experience Section -->
+            <div class="input-group">
+                <label>আগে কখনো কোনো টিমে কাজ করেছেন?</label>
+                <select id="has_experience" onchange="toggleExperienceField()" required>
+                    <option value="" disabled selected>সিলেক্ট করুন</option>
+                    <option value="Na">না</option>
+                    <option value="Ha">হ্যাঁ</option>
+                </select>
+            </div>
+
+            <div class="input-group" id="reason_wrapper" style="display: none;">
+                <label>পূর্ববর্তী টিম ছাড়ার কারণ ও অভিজ্ঞতার বিবরণ</label>
+                <textarea id="past_experience" rows="3" placeholder="কত বছর কাজ করেছেন, কোন পোস্টে ছিলেন এবং টিম ছাড়ার কারণ কি ছিল?"></textarea>
+            </div>
+
+            <div class="input-group">
+                <label>এনআইডি / জন্ম নিবন্ধন কার্ডের ছবি (NID / Birth Certificate)</label>
+                <input type="file" id="nid_file" accept="image/*" required>
+            </div>
+
+            <div class="input-group">
+                <label>ফেস পিকচার (Clear Face Photo / আপনার স্পষ্ট ছবি)</label>
+                <input type="file" id="face_file" accept="image/*" required>
+            </div>
+
+            <div class="input-group">
+                <label>টি-শার্ট সাইজ (T-Shirt Size)</label>
+                <select id="tshirt_size" required>
+                    <option value="" disabled selected>সাইজ নির্বাচন করুন</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                    <option value="XXL">XXL</option>
+                </select>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="confirmation" required>
+                <label for="confirmation">উপরের প্রদত্ত সকল তথ্য সত্য ও সঠিক মর্মে ঘোষণা প্রদান করছি।</label>
+            </div>
+
+            <button type="submit" id="submitBtn" class="cyber-btn">আবেদন সাবমিট করুন</button>
+            <p id="statusMessage"></p>
+        </form>
+    </div>
+
+    <script>
+        // Toggle Experience Reason Field
+        function toggleExperienceField() {
+            const val = document.getElementById('has_experience').value;
+            const wrapper = document.getElementById('reason_wrapper');
+            const textArea = document.getElementById('past_experience');
+            
+            if (val === 'Ha') {
+                wrapper.style.display = 'block';
+                textArea.setAttribute('required', 'true');
+            } else {
+                wrapper.style.display = 'none';
+                textArea.removeAttribute('required');
+                textArea.value = '';
+            }
+        }
+
+        const fileToBase64 = file => new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
+
+        async function handleFormSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const status = document.getElementById('statusMessage');
+
+            btn.innerText = "সাবমিট হচ্ছে, অপেক্ষা করুন...";
+            btn.disabled = true;
+            status.innerText = "";
+
+            try {
+                const nidFile = document.getElementById('nid_file').files[0];
+                const faceFile = document.getElementById('face_file').files[0];
+
+                const nidBase64 = nidFile ? await fileToBase64(nidFile) : null;
+                const faceBase64 = faceFile ? await fileToBase64(faceFile) : null;
+
+                const hasExp = document.getElementById('has_experience').value;
+                const expDetails = hasExp === 'Ha' ? document.getElementById('past_experience').value : 'আগে কোনো টিমে কাজ করেননি (না)';
+
+                const formData = {
+                    fullname: document.getElementById('fullname').value,
+                    email: document.getElementById('email').value,
+                    education: document.getElementById('education').value,
+                    present_address: document.getElementById('present_address').value,
+                    permanent_address: document.getElementById('permanent_address').value,
+                    phone: document.getElementById('phone').value,
+                    occupation: document.getElementById('occupation').value,
+                    past_experience: expDetails,
+                    tshirt_size: document.getElementById('tshirt_size').value,
+                    nid_name: nidFile ? nidFile.name : '',
+                    nid_data: nidBase64,
+                    face_name: faceFile ? faceFile.name : '',
+                    face_data: faceBase64
+                };
+
+                const response = await fetch('/api/sub', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    const templateParams = {
+                        fullname: formData.fullname,
+                        email: formData.email,
+                        phone: formData.phone
+                    };
+
+                    await emailjs.send('service_ehepc4b', 'YOUR_TEMPLATE_ID', templateParams);
+
+                    status.style.color = "#00ff66";
+                    status.innerText = "সফলভাবে আবেদন জমা হয়েছে! আপনার জিমেইলে কনফার্মেশন পাঠানো হয়েছে।";
+                    document.getElementById('recruitmentForm').reset();
+                    toggleExperienceField();
+                } else {
+                    throw new Error(result.error || "Something went wrong!");
+                }
+            } catch (error) {
+                status.style.color = "#ff3333";
+                status.innerText = "ত্রুটি: " + error.message;
+            } finally {
+                btn.innerText = "আবেদন সাবমিট করুন";
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
