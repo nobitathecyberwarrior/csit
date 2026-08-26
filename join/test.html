@@ -11,11 +11,126 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
-            emailjs.init("0f5sSpqFsI3wIFK6y"); // আপনার EmailJS Public Key এখানে বসাবেন
+            emailjs.init("0f5sSpqFsI3wIFK6y"); // আপনার EmailJS Public Key
         })();
     </script>
+    <style>
+        /* Premium Success Modal Styling */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(3, 7, 18, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-box {
+            background: #0d1321;
+            border: 1px solid rgba(0, 255, 204, 0.4);
+            box-shadow: 0 0 30px rgba(0, 255, 204, 0.25);
+            padding: 30px;
+            width: 90%;
+            max-width: 420px;
+            border-radius: 14px;
+            text-align: center;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.active .modal-box {
+            transform: scale(1);
+        }
+        .success-sticker {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px auto;
+            background: rgba(0, 255, 204, 0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #00ffcc;
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
+            animation: pulseGlow 2s infinite;
+        }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 204, 0.5); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 255, 204, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 204, 0); }
+        }
+        .success-sticker svg {
+            width: 45px;
+            height: 45px;
+            stroke: #00ffcc;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+            animation: checkDraw 0.6s ease-in-out forwards;
+        }
+        @keyframes checkDraw {
+            0% { stroke-dasharray: 0 100; }
+            100% { stroke-dasharray: 100 0; }
+        }
+        .modal-box h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: #ffffff;
+            font-size: 20px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 8px rgba(0, 255, 204, 0.5);
+        }
+        .modal-box p {
+            color: #94a3b8;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        .modal-btn {
+            background: linear-gradient(135deg, #00ffcc, #0077ff);
+            color: #030712;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 15px;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        .modal-btn:hover {
+            background: linear-gradient(135deg, #0077ff, #00ffcc);
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.5);
+        }
+    </style>
 </head>
 <body>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="success-sticker">
+                <svg viewBox="0 0 24 24">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+            </div>
+            <h3>আবেদন সফল হয়েছে!</h3>
+            <p>আপনার রিক্রুটমেন্ট আবেদন সফলভাবে সাবমিট হয়েছে এবং আপনার জিমেইলে কনফার্মেশন পাঠানো হয়েছে।</p>
+            <button class="modal-btn" onclick="redirectToHome()">OK</button>
+        </div>
+    </div>
 
     <div class="container">
         <!-- Logo Header -->
@@ -184,8 +299,8 @@
 
                     await emailjs.send('service_ehepc4b', 'template_ewq03rn', templateParams);
 
-                    status.style.color = "#00ff66";
-                    status.innerText = "সফলভাবে আবেদন জমা হয়েছে! আপনার জিমেইলে কনফার্মেশন পাঠানো হয়েছে।";
+                    // Show Premium Success Modal Dialog Box
+                    document.getElementById('successModal').classList.add('active');
                     document.getElementById('recruitmentForm').reset();
                     toggleExperienceField();
                 } else {
@@ -198,6 +313,11 @@
                 btn.innerText = "আবেদন সাবমিট করুন";
                 btn.disabled = false;
             }
+        }
+
+        // Redirect to Home Page (/) on OK button click
+        function redirectToHome() {
+            window.location.href = '/';
         }
     </script>
 </body>
