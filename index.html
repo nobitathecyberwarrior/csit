@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cyber Shield Intelligence Team</title>
+
+    <meta name="description" content="Cyber Shield Intelligence Team - Website currently under maintenance.">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at 50% 20%, rgba(0, 255, 170, 0.10), transparent 35%),
+                linear-gradient(135deg, #020605, #06110e 50%, #010403);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Background grid */
+        body::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0, 255, 170, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 170, 0.035) 1px, transparent 1px);
+            background-size: 45px 45px;
+            pointer-events: none;
+        }
+
+        /* Glow */
+        .glow {
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: #00ffae;
+            filter: blur(150px);
+            opacity: 0.08;
+            border-radius: 50%;
+        }
+
+        .glow.one {
+            top: -120px;
+            left: -100px;
+        }
+
+        .glow.two {
+            bottom: -150px;
+            right: -100px;
+        }
+
+        .container {
+            width: min(92%, 700px);
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            padding: 45px 25px;
+            border: 1px solid rgba(0, 255, 174, 0.18);
+            border-radius: 24px;
+            background: rgba(3, 12, 9, 0.72);
+            backdrop-filter: blur(15px);
+            box-shadow:
+                0 0 60px rgba(0, 255, 174, 0.05),
+                inset 0 0 40px rgba(0, 255, 174, 0.025);
+        }
+
+        .logo {
+            width: 115px;
+            height: 115px;
+            object-fit: contain;
+            margin-bottom: 22px;
+            filter: drop-shadow(0 0 20px rgba(0, 255, 174, 0.25));
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 14px;
+            border: 1px solid rgba(0, 255, 174, 0.25);
+            border-radius: 50px;
+            color: #00ffae;
+            background: rgba(0, 255, 174, 0.06);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            background: #00ffae;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00ffae;
+            animation: pulse 1.5s infinite;
+        }
+
+        h1 {
+            font-size: clamp(28px, 6vw, 48px);
+            line-height: 1.15;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        h1 span {
+            color: #00ffae;
+            text-shadow: 0 0 25px rgba(0, 255, 174, 0.18);
+        }
+
+        .subtitle {
+            max-width: 540px;
+            margin: 0 auto 28px;
+            color: #a9b8b3;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .terminal {
+            max-width: 480px;
+            margin: 0 auto 30px;
+            padding: 14px 17px;
+            text-align: left;
+            background: #010604;
+            border: 1px solid rgba(0, 255, 174, 0.12);
+            border-radius: 10px;
+            font-family: "Courier New", monospace;
+            font-size: 13px;
+            color: #00ffae;
+            overflow: hidden;
+        }
+
+        .terminal span {
+            color: #70817b;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            min-width: 190px;
+            padding: 13px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.25s ease;
+        }
+
+        .telegram {
+            background: #00ffae;
+            color: #03100b;
+            box-shadow: 0 8px 25px rgba(0, 255, 174, 0.13);
+        }
+
+        .telegram:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 255, 174, 0.25);
+        }
+
+        .facebook {
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            background: rgba(255, 255, 255, 0.035);
+            color: #ffffff;
+        }
+
+        .facebook:hover {
+            transform: translateY(-3px);
+            border-color: rgba(0, 255, 174, 0.35);
+            background: rgba(0, 255, 174, 0.06);
+        }
+
+        .footer {
+            margin-top: 32px;
+            color: #52635d;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.4;
+                transform: scale(0.75);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 35px 18px;
+                border-radius: 20px;
+            }
+
+            .logo {
+                width: 95px;
+                height: 95px;
+            }
+
+            .subtitle {
+                font-size: 14px;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .terminal {
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+
+    <main class="container">
+
+        <img
+            src="/assets/logo.png"
+            alt="Cyber Shield Intelligence Team Logo"
+            class="logo"
+        >
+
+        <div class="status">
+            <span class="status-dot"></span>
+            System Maintenance
+        </div>
+
+        <h1>
+            Cyber Shield<br>
+            <span>Intelligence Team</span>
+        </h1>
+
+        <p class="subtitle">
+            Our website is currently undergoing scheduled maintenance
+            and improvements. We’ll be back online soon.
+        </p>
+
+        <div class="terminal">
+            <span>root@csit:~$</span> system_update --in-progress<br>
+            <span>[+]</span> Security modules updating...<br>
+            <span>[+]</span> Website optimization running...
+        </div>
+
+        <div class="buttons">
+
+            <a
+                href="https://t.me/csitofficial"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn telegram"
+            >
+                <!-- Telegram Icon -->
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M21.8 3.1 2.9 10.4c-1.3.5-1.3 1.2-.2 1.5l4.8 1.5 1.8 5.7c.2.6.1.8.7.8.5 0 .7-.2.9-.5l2.3-2.2 4.8 3.5c.9.5 1.6.2 1.8-.8l3.1-14.6c.3-1.2-.5-1.8-1.5-1.3zM8.3 13.1l10.7-6.7c.5-.3.9-.1.5.2l-8.7 7.9-.3 3.3-1.4-4.7-3.7-1.2c-.8-.2-.8-.6.2-.8l2.7-.8z"/>
+                </svg>
+                Join us on Telegram
+            </a>
+
+            <a
+                href="https://www.facebook.com/Cyber.Shield.Intelligence.Team"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn facebook"
+            >
+                <!-- Facebook Icon -->
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M14 8h3V4h-3c-3.3 0-5 2-5 5v3H6v4h3v8h4v-8h3.2l.8-4H13V9c0-.7.3-1 1-1z"/>
+                </svg>
+                Follow us on Facebook
+            </a>
+
+        </div>
+
+        <div class="footer">
+            © 2026 Cyber Shield Intelligence Team. All rights reserved.
+        </div>
+
+    </main>
+
+</body>
+</html>
