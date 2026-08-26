@@ -16,8 +16,8 @@ export default async function handler(req, res) {
             tshirt_size,
             nid_name,
             nid_data,
-            video_name,
-            video_data
+            face_name, // ভিডিওর বদলে ফেস পিকচারের নাম
+            face_data  // ভিডিওর বদলে ফেস পিকচারের বেসড বেস৬৪ ডাটা
         } = req.body;
 
         const BOT_TOKEN = "8956969370:AAEfyW5riRwYHxjeJl6MNxSKf8oY7M5IxZI";
@@ -52,8 +52,8 @@ export default async function handler(req, res) {
             throw new Error(textResult.description || "Failed to send message to Telegram");
         }
 
-        // Helper function to send files to Telegram
-        async function sendFileToTelegram(fileData, fileName, caption, isVideo = false) {
+        // Helper function to send files to Telegram (Photo/Document)
+        async function sendFileToTelegram(fileData, fileName, caption, isPhoto = false) {
             if (!fileData) return;
             
             const base64Content = fileData.split(';base64,').pop();
@@ -64,21 +64,23 @@ export default async function handler(req, res) {
             formData.append('caption', caption);
             
             const blob = new Blob([buffer]);
-            formData.append(isVideo ? 'video' : 'document', blob, fileName);
+            // ছবি হলে sendPhoto এর জন্য 'photo' এবং ডকুমেন্ট হলে 'document' ফিল্ড নাম হবে
+            formData.append(isPhoto ? 'photo' : 'document', blob, fileName);
 
-            const endpoint = isVideo ? 'sendVideo' : 'sendDocument';
+            const endpoint = isPhoto ? 'sendPhoto' : 'sendDocument';
             await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/${endpoint}`, {
                 method: 'POST',
                 body: formData
             });
         }
 
-        // Send NID and Video to Telegram group
+        // Send NID and Face Picture to Telegram group
         if (nid_data) {
-            await sendFileToTelegram(nid_data, nid_name || 'nid.jpg', `NID/Birth Certificate of ${fullname}`);
+            await sendFileToTelegram(nid_data, nid_name || 'nid.jpg', `NID/Birth Certificate of ${fullname}`, false);
         }
-        if (video_data) {
-            await sendFileToTelegram(video_data, video_name || 'video.mp4', `Oath Video of ${fullname}`, true);
+        if (face_data) {
+            // ফেস পিকচার টেলিগ্রামে ছবি হিসেবে পাঠানোর জন্য শেষের প্যারামিটার true দেওয়া হলো
+            await sendFileToTelegram(face_data, face_name || 'face.jpg', `Face Picture of ${fullname}`, true);
         }
 
         return res.status(200).json({ success: true, message: 'Application submitted successfully' });
