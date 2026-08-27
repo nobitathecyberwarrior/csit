@@ -153,6 +153,16 @@
             </div>
 
             <div class="input-group">
+                <label>ফেসবুক প্রোফাইল লিংক (Facebook Profile Link)</label>
+                <input type="url" id="facebook_link" required placeholder="https://www.facebook.com/yourprofile">
+            </div>
+
+            <div class="input-group">
+                <label>টেলিগ্রাম ইউজারনেম (Telegram Username)</label>
+                <input type="text" id="telegram_username" required placeholder="@username">
+            </div>
+
+            <div class="input-group">
                 <label>শিক্ষাগত যোগ্যতা</label>
                 <input type="text" id="education" required placeholder="যেমন: SSC 2026 / HSC / Hons">
             </div>
@@ -269,6 +279,8 @@
                 const formData = {
                     fullname: document.getElementById('fullname').value,
                     email: document.getElementById('email').value,
+                    facebook_link: document.getElementById('facebook_link').value,
+                    telegram_username: document.getElementById('telegram_username').value,
                     education: document.getElementById('education').value,
                     present_address: document.getElementById('present_address').value,
                     permanent_address: document.getElementById('permanent_address').value,
