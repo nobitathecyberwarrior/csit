@@ -7,6 +7,8 @@ export default async function handler(req, res) {
         const {
             fullname,
             email,
+            facebook_link,
+            telegram_username,
             education,
             present_address,
             permanent_address,
@@ -16,17 +18,19 @@ export default async function handler(req, res) {
             tshirt_size,
             nid_name,
             nid_data,
-            face_name, // ভিডিওর বদলে ফেস পিকচারের নাম
-            face_data  // ভিডিওর বদলে ফেস পিকচারের বেসড বেস৬৪ ডাটা
+            face_name,
+            face_data
         } = req.body;
 
         const BOT_TOKEN = "8956969370:AAEfyW5riRwYHxjeJl6MNxSKf8oY7M5IxZI";
         const GROUP_ID = "-5415150168";
 
-        // Format message for Telegram
+        // Format message for Telegram with Facebook & Telegram info
         const message = `🚨 *New CSIT Member Application* 🚨\n\n` +
             `👤 *Full Name:* ${fullname}\n` +
             `📧 *Gmail:* ${email}\n` +
+            `🔗 *Facebook Profile:* ${facebook_link}\n` +
+            `💬 *Telegram Username:* ${telegram_username}\n` +
             `🎓 *Education:* ${education}\n` +
             `🏠 *Present Address:* ${present_address}\n` +
             `🏡 *Permanent Address:* ${permanent_address}\n` +
@@ -64,7 +68,6 @@ export default async function handler(req, res) {
             formData.append('caption', caption);
             
             const blob = new Blob([buffer]);
-            // ছবি হলে sendPhoto এর জন্য 'photo' এবং ডকুমেন্ট হলে 'document' ফিল্ড নাম হবে
             formData.append(isPhoto ? 'photo' : 'document', blob, fileName);
 
             const endpoint = isPhoto ? 'sendPhoto' : 'sendDocument';
@@ -79,7 +82,6 @@ export default async function handler(req, res) {
             await sendFileToTelegram(nid_data, nid_name || 'nid.jpg', `NID/Birth Certificate of ${fullname}`, false);
         }
         if (face_data) {
-            // ফেস পিকচার টেলিগ্রামে ছবি হিসেবে পাঠানোর জন্য শেষের প্যারামিটার true দেওয়া হলো
             await sendFileToTelegram(face_data, face_name || 'face.jpg', `Face Picture of ${fullname}`, true);
         }
 
