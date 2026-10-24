@@ -1,310 +1,343 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Cyber Shield Intelligence Team</title>
-
-    <meta name="description" content="Cyber Shield Intelligence Team - Website currently under maintenance.">
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            min-height: 100vh;
-            font-family: Arial, Helvetica, sans-serif;
-            background:
-                radial-gradient(circle at 50% 20%, rgba(0, 255, 170, 0.10), transparent 35%),
-                linear-gradient(135deg, #020605, #06110e 50%, #010403);
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            position: relative;
-        }
-
-        /* Background grid */
-        body::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(0, 255, 170, 0.035) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 170, 0.035) 1px, transparent 1px);
-            background-size: 45px 45px;
-            pointer-events: none;
-        }
-
-        /* Glow */
-        .glow {
-            position: absolute;
-            width: 350px;
-            height: 350px;
-            background: #00ffae;
-            filter: blur(150px);
-            opacity: 0.08;
-            border-radius: 50%;
-        }
-
-        .glow.one {
-            top: -120px;
-            left: -100px;
-        }
-
-        .glow.two {
-            bottom: -150px;
-            right: -100px;
-        }
-
-        .container {
-            width: min(92%, 700px);
-            text-align: center;
-            position: relative;
-            z-index: 2;
-            padding: 45px 25px;
-            border: 1px solid rgba(0, 255, 174, 0.18);
-            border-radius: 24px;
-            background: rgba(3, 12, 9, 0.72);
-            backdrop-filter: blur(15px);
-            box-shadow:
-                0 0 60px rgba(0, 255, 174, 0.05),
-                inset 0 0 40px rgba(0, 255, 174, 0.025);
-        }
-
-        .logo {
-            width: 115px;
-            height: 115px;
-            object-fit: contain;
-            margin-bottom: 22px;
-            filter: drop-shadow(0 0 20px rgba(0, 255, 174, 0.25));
-        }
-
-        .status {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 7px 14px;
-            border: 1px solid rgba(0, 255, 174, 0.25);
-            border-radius: 50px;
-            color: #00ffae;
-            background: rgba(0, 255, 174, 0.06);
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
-
-        .status-dot {
-            width: 7px;
-            height: 7px;
-            background: #00ffae;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #00ffae;
-            animation: pulse 1.5s infinite;
-        }
-
-        h1 {
-            font-size: clamp(28px, 6vw, 48px);
-            line-height: 1.15;
-            margin-bottom: 15px;
-            letter-spacing: -1px;
-        }
-
-        h1 span {
-            color: #00ffae;
-            text-shadow: 0 0 25px rgba(0, 255, 174, 0.18);
-        }
-
-        .subtitle {
-            max-width: 540px;
-            margin: 0 auto 28px;
-            color: #a9b8b3;
-            font-size: 15px;
-            line-height: 1.7;
-        }
-
-        .terminal {
-            max-width: 480px;
-            margin: 0 auto 30px;
-            padding: 14px 17px;
-            text-align: left;
-            background: #010604;
-            border: 1px solid rgba(0, 255, 174, 0.12);
-            border-radius: 10px;
-            font-family: "Courier New", monospace;
-            font-size: 13px;
-            color: #00ffae;
-            overflow: hidden;
-        }
-
-        .terminal span {
-            color: #70817b;
-        }
-
-        .buttons {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 9px;
-            min-width: 190px;
-            padding: 13px 20px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 600;
-            transition: 0.25s ease;
-        }
-
-        .telegram {
-            background: #00ffae;
-            color: #03100b;
-            box-shadow: 0 8px 25px rgba(0, 255, 174, 0.13);
-        }
-
-        .telegram:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(0, 255, 174, 0.25);
-        }
-
-        .facebook {
-            border: 1px solid rgba(255, 255, 255, 0.14);
-            background: rgba(255, 255, 255, 0.035);
-            color: #ffffff;
-        }
-
-        .facebook:hover {
-            transform: translateY(-3px);
-            border-color: rgba(0, 255, 174, 0.35);
-            background: rgba(0, 255, 174, 0.06);
-        }
-
-        .footer {
-            margin-top: 32px;
-            color: #52635d;
-            font-size: 11px;
-            letter-spacing: 0.5px;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.4;
-                transform: scale(0.75);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 35px 18px;
-                border-radius: 20px;
-            }
-
-            .logo {
-                width: 95px;
-                height: 95px;
-            }
-
-            .subtitle {
-                font-size: 14px;
-            }
-
-            .btn {
-                width: 100%;
-            }
-
-            .terminal {
-                font-size: 11px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#070b12">
+  <meta name="description" content="Cyber Shield Intelligence Team (CSIT) is a cybersecurity community focused on digital safety, security awareness, ethical learning, and responsible cyber defense.">
+  <meta name="keywords" content="Cyber Shield Intelligence Team, CSIT, cybersecurity, cyber security Bangladesh, security awareness, ethical hacking education, digital safety, online security, cyber defense, information security">
+  <meta name="author" content="Cyber Shield Intelligence Team (CSIT)">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://csitbd.org/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Cyber Shield Intelligence Team | CSIT">
+  <meta property="og:description" content="Building a safer digital world through cybersecurity awareness, ethical learning, and responsible defense.">
+  <meta property="og:image" content="assets/file_00000000f4187207bb6817070d03674e.png">
+  <meta property="og:site_name" content="Cyber Shield Intelligence Team">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cyber Shield Intelligence Team | CSIT">
+  <meta name="twitter:description" content="Cybersecurity awareness. Ethical learning. Digital resilience.">
+  <meta name="twitter:image" content="assets/file_00000000f4187207bb6817070d03674e.png">
+  <title>Cyber Shield Intelligence Team</title>
+  <link rel="icon" type="image/png" href="assets/file_00000000f4187207bb6817070d03674e.png">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070b12;
+      --panel: rgba(15, 23, 36, .76);
+      --panel-solid: #0d1420;
+      --text: #f1f6fc;
+      --muted: #9baabd;
+      --line: rgba(144, 170, 199, .17);
+      --cyan: #55e6d0;
+      --blue: #6c9bff;
+      --purple: #9b82ff;
+      --max: 1160px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 12% 4%, rgba(42, 116, 150, .17), transparent 34rem),
+        radial-gradient(ellipse at 90% 18%, rgba(91, 68, 173, .14), transparent 32rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none; z-index: -1;
+      opacity: .16;
+      background-image: linear-gradient(rgba(126, 160, 190, .12) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(126, 160, 190, .12) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: linear-gradient(to bottom, black, transparent 78%);
+    }
+    a { color: inherit; }
+    .container { width: min(var(--max), calc(100% - 40px)); margin-inline: auto; }
+    .topline { height: 3px; background: linear-gradient(90deg, transparent, var(--cyan), var(--blue), var(--purple), transparent); }
+    .header { padding: 24px 0; }
+    .brand { display: flex; align-items: center; gap: 13px; min-width: 0; }
+    .brand img { width: 48px; height: 48px; object-fit: contain; filter: drop-shadow(0 0 16px rgba(85,230,208,.2)); }
+    .brand-name { font-weight: 800; letter-spacing: .09em; font-size: .98rem; line-height: 1.25; }
+    .brand-sub { display: block; color: var(--muted); font-size: .7rem; letter-spacing: .19em; margin-top: 4px; }
+    .header-row { display: flex; justify-content: space-between; align-items: center; }
+    .status { display: inline-flex; align-items: center; gap: 9px; color: #b8c9d8; font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; }
+    .status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 13px var(--cyan); }
+    .hero { padding: 76px 0 90px; position: relative; }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; }
+    .eyebrow { color: var(--cyan); font-size: .78rem; letter-spacing: .22em; font-weight: 800; text-transform: uppercase; display: flex; align-items: center; gap: 12px; }
+    .eyebrow::before { content: ""; width: 30px; height: 1px; background: var(--cyan); }
+    h1 { margin: 22px 0 20px; font-size: clamp(2.8rem, 6.4vw, 5.5rem); line-height: .99; letter-spacing: -.065em; max-width: 760px; }
+    .gradient-text { color: transparent; background: linear-gradient(100deg, #e8fbff 4%, var(--cyan) 48%, #8ca9ff 92%); -webkit-background-clip: text; background-clip: text; }
+    .hero-copy { color: var(--muted); font-size: clamp(1rem, 1.5vw, 1.14rem); max-width: 610px; }
+    .hero-actions { display: flex; gap: 13px; flex-wrap: wrap; margin-top: 30px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; border: 1px solid var(--line); padding: 13px 19px; border-radius: 11px; text-decoration: none; font-weight: 750; font-size: .9rem; transition: transform .22s ease, border-color .22s ease, background .22s ease; }
+    .button:hover { transform: translateY(-3px); border-color: rgba(85,230,208,.6); }
+    .button-primary { color: #061412; border-color: transparent; background: linear-gradient(110deg, var(--cyan), #8af0dc); box-shadow: 0 10px 30px rgba(85,230,208,.12); }
+    .button-quiet { background: rgba(255,255,255,.025); }
+    .hero-note { display: flex; gap: 10px; align-items: center; margin-top: 23px; color: #7f91a5; font-size: .8rem; }
+    .hero-note span { color: var(--cyan); }
+    .visual { position: relative; min-height: 390px; display: grid; place-items: center; }
+    .orbit { position: absolute; width: min(100%, 390px); aspect-ratio: 1; border: 1px solid rgba(100, 224, 221, .17); border-radius: 50%; animation: orbit 24s linear infinite; }
+    .orbit::before, .orbit::after { content: ""; position: absolute; border: 1px solid rgba(108,155,255,.18); border-radius: 50%; inset: 11%; }
+    .orbit::after { inset: 23%; border-color: rgba(155,130,255,.2); }
+    .orbit-dot { position: absolute; top: 15%; right: 18%; width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 18px var(--cyan); }
+    .shield-card { width: min(100%, 310px); aspect-ratio: .9; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 17px; border: 1px solid rgba(125, 196, 219, .25); border-radius: 25px; background: linear-gradient(145deg, rgba(21,37,53,.88), rgba(9,15,25,.84)); box-shadow: 0 28px 90px rgba(0,0,0,.35), inset 0 1px rgba(255,255,255,.05); position: relative; overflow: hidden; }
+    .shield-card::before { content: ""; position: absolute; inset: -60% 35%; width: 30%; transform: rotate(30deg); background: linear-gradient(90deg, transparent, rgba(85,230,208,.1), transparent); animation: sweep 7s ease-in-out infinite; }
+    .shield-icon { width: 116px; height: 130px; filter: drop-shadow(0 0 24px rgba(85,230,208,.18)); }
+    .visual-label { text-align: center; position: relative; z-index: 1; }
+    .visual-label strong { display: block; letter-spacing: .17em; font-size: .83rem; }
+    .visual-label small { color: var(--muted); letter-spacing: .1em; font-size: .69rem; }
+    .float-tag { position: absolute; z-index: 2; border: 1px solid var(--line); background: rgba(10,17,27,.9); padding: 10px 13px; border-radius: 10px; font-size: .75rem; color: #c4d1df; box-shadow: 0 14px 32px rgba(0,0,0,.22); }
+    .float-tag b { color: var(--cyan); margin-right: 7px; }
+    .tag-one { left: 0; top: 23%; }
+    .tag-two { right: -1%; bottom: 20%; }
+    .section { padding: 76px 0; }
+    .section-head { max-width: 700px; margin-bottom: 34px; }
+    .section-kicker { color: var(--cyan); text-transform: uppercase; letter-spacing: .18em; font-size: .73rem; font-weight: 800; }
+    h2 { margin: 10px 0 13px; font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing: -.045em; line-height: 1.1; }
+    .section-head p, .body-copy { color: var(--muted); margin: 0; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .panel { border: 1px solid var(--line); border-radius: 18px; padding: 28px; background: linear-gradient(145deg, rgba(18,28,42,.78), rgba(10,16,26,.74)); }
+    .panel-icon { width: 42px; height: 42px; display: grid; place-items: center; border: 1px solid rgba(85,230,208,.25); border-radius: 12px; color: var(--cyan); background: rgba(85,230,208,.06); margin-bottom: 20px; }
+    .panel h3 { margin: 0 0 10px; font-size: 1.18rem; }
+    .panel p { margin: 0; color: var(--muted); font-size: .94rem; }
+    .values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 18px; }
+    .value { padding: 21px; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,.018); }
+    .value span { color: var(--cyan); font-size: .73rem; font-weight: 800; letter-spacing: .14em; }
+    .value h3 { font-size: 1rem; margin: 8px 0 6px; }
+    .value p { color: var(--muted); font-size: .85rem; margin: 0; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .service { border: 1px solid var(--line); border-radius: 16px; padding: 24px; background: rgba(14,22,34,.65); transition: transform .22s ease, border-color .22s ease; }
+    .service:hover { transform: translateY(-4px); border-color: rgba(85,230,208,.38); }
+    .service .number { color: var(--cyan); font-size: .75rem; letter-spacing: .14em; }
+    .service h3 { margin: 14px 0 8px; font-size: 1.04rem; }
+    .service p { color: var(--muted); font-size: .88rem; margin: 0; }
+    .statement { border: 1px solid rgba(85,230,208,.22); border-radius: 22px; padding: clamp(28px, 5vw, 55px); background: radial-gradient(ellipse at 100% 0%, rgba(85,230,208,.09), transparent 48%), rgba(13,21,32,.75); display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center; }
+    .statement p { margin: 0; color: var(--muted); max-width: 720px; }
+    .statement-mark { color: var(--cyan); font-size: 2.5rem; opacity: .8; }
+    .connect { text-align: center; }
+    .connect .section-head { margin-inline: auto; }
+    .social-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: left; }
+    .social-card { padding: 23px; border: 1px solid var(--line); border-radius: 16px; text-decoration: none; background: rgba(14,22,34,.65); transition: transform .22s ease, border-color .22s ease, background .22s ease; display: block; }
+    .social-card:hover { transform: translateY(-4px); border-color: rgba(85,230,208,.4); background: rgba(20,34,48,.8); }
+    .social-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .social-icon { width: 43px; height: 43px; display: grid; place-items: center; border-radius: 12px; background: rgba(108,155,255,.11); color: #a6c1ff; font-size: 1.2rem; font-weight: 850; }
+    .social-card:nth-child(3) .social-icon { background: rgba(85,230,208,.1); color: var(--cyan); }
+    .external { color: #8294a8; font-size: 1.15rem; }
+    .social-card h3 { margin: 0 0 6px; font-size: 1rem; }
+    .social-card p { margin: 0; color: var(--muted); font-size: .84rem; }
+    .social-card small { display: inline-block; margin-top: 16px; color: var(--cyan); font-size: .77rem; font-weight: 750; }
+    .footer { border-top: 1px solid var(--line); padding: 25px 0 32px; color: #8190a2; font-size: .8rem; }
+    .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 15px; }
+    .footer strong { color: #c9d6e3; }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @keyframes orbit { to { transform: rotate(360deg); } }
+    @keyframes sweep { 0%, 20% { transform: translateX(-180%) rotate(30deg); } 65%, 100% { transform: translateX(280%) rotate(30deg); } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+    @media (max-width: 850px) {
+      .hero { padding: 48px 0 66px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 25px; }
+      .hero-copy { max-width: 680px; }
+      .visual { min-height: 350px; }
+      .about-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .values { grid-template-columns: 1fr; }
+      .statement { grid-template-columns: 1fr; }
+      .statement-mark { display: none; }
+      .social-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 520px) {
+      .container { width: min(var(--max), calc(100% - 28px)); }
+      .header { padding: 18px 0; }
+      .brand img { width: 42px; height: 42px; }
+      .brand-name { font-size: .83rem; }
+      .brand-sub { font-size: .62rem; }
+      .status { display: none; }
+      h1 { font-size: clamp(2.65rem, 14vw, 4.1rem); }
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .button { width: 100%; }
+      .visual { min-height: 310px; }
+      .shield-card { width: 250px; }
+      .orbit { width: 300px; }
+      .tag-one { left: -3px; top: 14%; }
+      .tag-two { right: -2px; bottom: 12%; }
+      .section { padding: 54px 0; }
+      .services-grid { grid-template-columns: 1fr; }
+      .panel { padding: 23px; }
+      .footer-row { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="topline"></div>
+  <header class="header">
+    <div class="container header-row">
+      <a class="brand" href="#" aria-label="Cyber Shield Intelligence Team home" style="text-decoration:none">
+        <img src="assets/file_00000000f4187207bb6817070d03674e.png" alt="Cyber Shield Intelligence Team logo" width="48" height="48">
+        <span>
+          <span class="brand-name">CYBER SHIELD</span>
+          <span class="brand-sub">INTELLIGENCE TEAM · CSIT</span>
+        </span>
+      </a>
+      <div class="status">Awareness · Ethics · Defense</div>
+    </div>
+  </header>
 
-    <div class="glow one"></div>
-    <div class="glow two"></div>
-
-    <main class="container">
-
-        <img
-            src="/assets/file_00000000f4187207bb6817070d03674e.png"
-            alt="Cyber Shield Intelligence Team Logo"
-            class="logo"
-        >
-
-        <div class="status">
-            <span class="status-dot"></span>
-            System Maintenance
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="eyebrow">Cybersecurity &amp; Digital Safety</div>
+          <h1>Defending the<br><span class="gradient-text">digital frontier.</span></h1>
+          <p class="hero-copy">Cyber Shield Intelligence Team (CSIT) is a cybersecurity-focused community committed to digital safety, security awareness, ethical learning, and a more resilient online world.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#connect">Connect With CSIT <span aria-hidden="true">↗</span></a>
+            <a class="button button-quiet" href="#about">Discover Our Mission <span aria-hidden="true">↓</span></a>
+          </div>
+          <div class="hero-note"><span>✦</span> Learn responsibly. Protect what matters. Build trust online.</div>
         </div>
-
-        <h1>
-            Cyber Shield<br>
-            <span>Intelligence Team</span>
-        </h1>
-
-        <p class="subtitle">
-            Our website is currently undergoing scheduled maintenance
-            and improvements. We’ll be back online soon.
-        </p>
-
-        <div class="terminal">
-            <span>root@csit:~$</span> system_update --in-progress<br>
-            <span>[+]</span> Security modules updating...<br>
-            <span>[+]</span> Website optimization running...
+        <div class="visual reveal" aria-label="Abstract cybersecurity shield illustration">
+          <div class="orbit"><span class="orbit-dot"></span></div>
+          <div class="float-tag tag-one"><b>01</b> Digital Awareness</div>
+          <div class="float-tag tag-two"><b>02</b> Ethical Security</div>
+          <div class="shield-card">
+            <svg class="shield-icon" viewBox="0 0 120 140" fill="none" aria-hidden="true">
+              <path d="M60 5L105 22V58C105 88 86 113 60 132C34 113 15 88 15 58V22L60 5Z" stroke="#55E6D0" stroke-width="2.2"/>
+              <path d="M60 16L94 29V58C94 81 80 101 60 117C40 101 26 81 26 58V29L60 16Z" stroke="#6C9BFF" stroke-width="1.2" opacity=".8"/>
+              <path d="M43 61L54 72L78 46" stroke="#55E6D0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="60" cy="61" r="32" stroke="#55E6D0" stroke-opacity=".18"/>
+            </svg>
+            <div class="visual-label"><strong>CSIT / SECURITY</strong><small>THINK · LEARN · DEFEND</small></div>
+          </div>
         </div>
+      </div>
+    </section>
 
-        <div class="buttons">
-
-            <a
-                href="https://t.me/csitofficial"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn telegram"
-            >
-                <!-- Telegram Icon -->
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M21.8 3.1 2.9 10.4c-1.3.5-1.3 1.2-.2 1.5l4.8 1.5 1.8 5.7c.2.6.1.8.7.8.5 0 .7-.2.9-.5l2.3-2.2 4.8 3.5c.9.5 1.6.2 1.8-.8l3.1-14.6c.3-1.2-.5-1.8-1.5-1.3zM8.3 13.1l10.7-6.7c.5-.3.9-.1.5.2l-8.7 7.9-.3 3.3-1.4-4.7-3.7-1.2c-.8-.2-.8-.6.2-.8l2.7-.8z"/>
-                </svg>
-                Join us on Telegram
-            </a>
-
-            <a
-                href="https://www.facebook.com/Cyber.Shield.Intelligence.Team"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn facebook"
-            >
-                <!-- Facebook Icon -->
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M14 8h3V4h-3c-3.3 0-5 2-5 5v3H6v4h3v8h4v-8h3.2l.8-4H13V9c0-.7.3-1 1-1z"/>
-                </svg>
-                Follow us on Facebook
-            </a>
-
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-kicker">Who We Are</div>
+          <h2>Security begins with <span class="gradient-text">knowledge.</span></h2>
+          <p>We believe a safer internet starts with informed people, responsible technology use, and a shared commitment to protecting digital spaces.</p>
         </div>
-
-        <div class="footer">
-            © 2026 Cyber Shield Intelligence Team. All rights reserved.
+        <div class="about-grid">
+          <article class="panel reveal">
+            <div class="panel-icon" aria-hidden="true">◈</div>
+            <h3>About CSIT</h3>
+            <p>Cyber Shield Intelligence Team (CSIT) is an initiative centered on cybersecurity awareness and ethical security learning. We aim to make digital safety easier to understand and encourage people to build better security habits in everyday life.</p>
+          </article>
+          <article class="panel reveal">
+            <div class="panel-icon" aria-hidden="true">⌁</div>
+            <h3>Our Mission</h3>
+            <p>Our mission is to promote responsible cybersecurity knowledge, help people recognize common online risks, and support a culture where technology is explored ethically and used to protect—not harm—others.</p>
+          </article>
         </div>
+        <div class="values">
+          <article class="value reveal"><span>01 / PRINCIPLE</span><h3>Ethics First</h3><p>Respect privacy, permission, and the law in every security activity.</p></article>
+          <article class="value reveal"><span>02 / PURPOSE</span><h3>Awareness for All</h3><p>Make digital safety knowledge approachable and useful for everyone.</p></article>
+          <article class="value reveal"><span>03 / COMMITMENT</span><h3>Responsible Defense</h3><p>Encourage practical habits that strengthen personal and community security.</p></article>
+        </div>
+      </div>
+    </section>
 
-    </main>
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-kicker">What We Focus On</div>
+          <h2>Building stronger <span class="gradient-text">digital habits.</span></h2>
+          <p>Our focus areas are designed to support safer online experiences and responsible cybersecurity learning.</p>
+        </div>
+        <div class="services-grid">
+          <article class="service reveal"><span class="number">FOCUS / 01</span><h3>Cybersecurity Awareness</h3><p>Understand online threats, suspicious activity, and the everyday steps that help keep accounts and devices safer.</p></article>
+          <article class="service reveal"><span class="number">FOCUS / 02</span><h3>Digital Safety Education</h3><p>Learn about strong authentication, privacy settings, secure browsing, and protecting personal information.</p></article>
+          <article class="service reveal"><span class="number">FOCUS / 03</span><h3>Ethical Security Learning</h3><p>Explore security concepts through authorized, educational, and responsible practice environments.</p></article>
+          <article class="service reveal"><span class="number">FOCUS / 04</span><h3>Threat &amp; Scam Awareness</h3><p>Recognize common phishing patterns, misleading links, impersonation, and social-engineering risks.</p></article>
+          <article class="service reveal"><span class="number">FOCUS / 05</span><h3>Privacy Best Practices</h3><p>Build better habits around data sharing, app permissions, account recovery, and personal privacy.</p></article>
+          <article class="service reveal"><span class="number">FOCUS / 06</span><h3>Community Knowledge</h3><p>Share useful learning resources and encourage constructive, respectful conversations about security.</p></article>
+        </div>
+      </div>
+    </section>
 
+    <section class="section">
+      <div class="container">
+        <div class="statement reveal">
+          <div>
+            <div class="section-kicker">Our Commitment</div>
+            <h2>Knowledge is powerful.<br><span class="gradient-text">Use it responsibly.</span></h2>
+            <p>CSIT supports lawful, permission-based security learning. We do not promote unauthorized access, privacy violations, malware, or activities intended to harm others. Our goal is to help create a more informed and secure digital community.</p>
+          </div>
+          <div class="statement-mark" aria-hidden="true">✳</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section connect" id="connect">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="section-kicker">Stay Connected</div>
+          <h2>Connect with <span class="gradient-text">our community.</span></h2>
+          <p>Follow CSIT for updates, community discussions, and cybersecurity awareness content.</p>
+        </div>
+        <div class="social-grid">
+          <!-- Replace the demo Facebook URLs below with the official CSIT links. -->
+          <a class="social-card reveal" href="https://www.facebook.com/Cyber.Shield.Intelligence.Team" target="_blank" rel="noopener noreferrer" aria-label="Visit Facebook page (demo link)">
+            <div class="social-top"><span class="social-icon">f</span><span class="external" aria-hidden="true">↗</span></div>
+            <h3>Facebook Page</h3>
+            <p>Follow our page for official announcements, awareness posts, and updates.</p>
+            <small>Visit Facebook Page ↗</small>
+          </a>
+          <a class="social-card reveal" href="https://facebook.com/groups/cyber.shield.intelligence.team//" target="_blank" rel="noopener noreferrer" aria-label="Visit Facebook group (demo link)">
+            <div class="social-top"><span class="social-icon">◎</span><span class="external" aria-hidden="true">↗</span></div>
+            <h3>Facebook Group</h3>
+            <p>Join community discussions and learn with other cybersecurity enthusiasts.</p>
+            <small>Join Facebook Group ↗</small>
+          </a>
+          <a class="social-card reveal" href="https://t.me/csitofficial" target="_blank" rel="noopener noreferrer" aria-label="Visit CSIT Telegram channel">
+            <div class="social-top"><span class="social-icon">➤</span><span class="external" aria-hidden="true">↗</span></div>
+            <h3>Telegram Channel</h3>
+            <p>Get CSIT updates and cybersecurity awareness content on Telegram.</p>
+            <small>@csitofficial ↗</small>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-row">
+      <div><strong>CSIT</strong> — Cyber Shield Intelligence Team</div>
+      <div>© <span id="year"></span> Cyber Shield Intelligence Team. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Lightweight reveal-on-scroll; gracefully shows content when IntersectionObserver is unavailable.
+    (function () {
+      const items = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        items.forEach(item => item.classList.add('visible'));
+      } else {
+        const observer = new IntersectionObserver((entries, obs) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        items.forEach(item => observer.observe(item));
+      }
+      document.getElementById('year').textContent = new Date().getFullYear();
+    })();
+  </script>
 </body>
 </html>
