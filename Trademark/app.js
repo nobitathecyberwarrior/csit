@@ -276,7 +276,7 @@
     }
   });
 
-  fetch("/certificates.json", { cache: "no-cache" })
+  fetch("/Trademark/certificates.json", { cache: "no-cache" })
     .then(response => {
       if (!response.ok) {
         throw new Error("Certificate index could not be loaded.");
