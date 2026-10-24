@@ -1,0 +1,21 @@
+
+[
+  {
+    "id": "TM-193586",
+    "title": "Trademark Certificate - Yusuf Ali",
+    "tmNumber": "193586",
+    "serialNumber": "57746",
+    "owner": "Yusuf Ali",
+    "classNumber": "35",
+    "path": "certificates/tm-193586.pdf"
+  },
+  {
+    "id": "TM-200001",
+    "title": "Trademark Certificate - Example Two",
+    "tmNumber": "200001",
+    "serialNumber": "57747",
+    "owner": "Example Owner",
+    "classNumber": "35",
+    "path": "certificates/tm-200001.pdf"
+  }
+]
