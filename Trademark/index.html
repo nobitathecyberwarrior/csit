@@ -1,0 +1,133 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07110f">
+  <meta name="description" content="Search and view trademark certificates in the CSIT certificate portal.">
+  <title>Trademark Certificate Search | CSIT</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="header">
+    <a class="brand" href="/" aria-label="CSIT home">
+      <img
+        src="/assets/file_00000000f4187207bb6817070d03674e.png"
+        alt="CSIT Logo"
+      >
+      <span>
+        <strong>CYBER SHIELD</strong>
+        <small>INTELLIGENCE TEAM · CSIT</small>
+      </span>
+    </a>
+    <span class="status"><i></i> CERTIFICATE PORTAL</span>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="eyebrow">◆ CSIT DOCUMENT VERIFICATION PORTAL</div>
+
+      <h1>Trademark Certificate<br><span>Search Portal</span></h1>
+
+      <p class="subtitle">
+        Search your trademark certificate by TM number, serial number,
+        owner name or class. Open matching certificates directly on this page.
+      </p>
+
+      <form id="searchForm" class="search-box" role="search">
+        <span class="search-icon" aria-hidden="true">⌕</span>
+        <label class="sr-only" for="searchInput">
+          Search trademark certificate
+        </label>
+        <input
+          id="searchInput"
+          type="search"
+          placeholder="Search your trademark certificate..."
+          autocomplete="off"
+        >
+        <button type="submit">SEARCH <span>↗</span></button>
+      </form>
+
+      <p class="hint">
+        Search by <b>TM No.</b>, <b>Serial No.</b>, owner or class
+      </p>
+
+      <div class="features">
+        <span>◈ Fast Search</span>
+        <span>◇ Online PDF Viewer</span>
+        <span>◈ CSIT Portal</span>
+      </div>
+    </section>
+
+    <section class="archive">
+      <div class="archive-heading">
+        <div>
+          <small>CERTIFICATE ARCHIVE</small>
+          <h2>Find a certificate</h2>
+        </div>
+        <span id="resultCount">Loading...</span>
+      </div>
+
+      <div class="archive-bar">
+        <span id="resultLabel">● Ready to search</span>
+        <button id="clearSearch" type="button" hidden>Clear ×</button>
+      </div>
+
+      <div id="results" class="results" aria-live="polite">
+        <div class="message">Loading certificate archive...</div>
+      </div>
+
+      <nav id="pagination" class="pagination"
+           aria-label="Certificate pages"></nav>
+
+      <p class="notice">
+        Only documents authorized for public access should be listed here.
+        Hiding download controls cannot prevent saving a public PDF.
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-brand">
+      <img src="/assets/file_00000000f4187207bb6817070d03674e.png"
+           alt="">
+      <span>
+        <b>CSIT</b>
+        <small>CYBER SHIELD INTELLIGENCE TEAM</small>
+      </span>
+    </div>
+    <span>DOCUMENT PORTAL · © <span id="year"></span> CSIT</span>
+  </footer>
+
+  <!-- PDF viewer: intentionally no separate download button -->
+  <div id="viewer" class="viewer" hidden>
+    <section class="viewer-window" role="dialog"
+             aria-modal="true" aria-labelledby="viewerTitle">
+      <header class="viewer-header">
+        <div class="pdf-badge">PDF</div>
+        <div class="viewer-heading">
+          <h2 id="viewerTitle">Trademark Certificate</h2>
+          <p id="viewerMeta">Certificate preview</p>
+        </div>
+        <button id="closeViewer" class="close-btn"
+                type="button" aria-label="Close viewer">×</button>
+      </header>
+
+      <div class="pdf-area">
+        <iframe
+          id="pdfFrame"
+          title="Trademark certificate PDF"
+          src="about:blank"
+        ></iframe>
+      </div>
+
+      <div class="viewer-footer">
+        CSIT · CERTIFICATE VIEWER
+        <span>Close to return to search</span>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
